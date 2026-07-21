@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Quality Checks Requiring Review"
                 }
               },
-              "queryRef": "Measures.Quality Checks Requiring Review",
+              "queryRef": "KPI_Measures.Quality Checks Requiring Review",
               "nativeQueryRef": "Quality Checks Requiring Review"
             }
           ]

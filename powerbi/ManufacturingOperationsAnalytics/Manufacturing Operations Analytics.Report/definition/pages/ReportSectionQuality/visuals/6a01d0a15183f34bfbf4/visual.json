@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Validated Daily Rows"
                 }
               },
-              "queryRef": "Measures.Validated Daily Rows",
+              "queryRef": "KPI_Measures.Validated Daily Rows",
               "nativeQueryRef": "Validated Daily Rows"
             },
             {
@@ -34,13 +34,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Validated Hourly Rows"
                 }
               },
-              "queryRef": "Measures.Validated Hourly Rows",
+              "queryRef": "KPI_Measures.Validated Hourly Rows",
               "nativeQueryRef": "Validated Hourly Rows"
             },
             {
@@ -48,13 +48,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Validated Downtime Events"
                 }
               },
-              "queryRef": "Measures.Validated Downtime Events",
+              "queryRef": "KPI_Measures.Validated Downtime Events",
               "nativeQueryRef": "Validated Downtime Events"
             }
           ]

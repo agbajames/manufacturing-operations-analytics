@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "74db6c06f3cb5d090a7e",
   "position": {
     "x": 24,
     "y": 448,
-    "width": 600,
-    "height": 240,
     "z": 200,
+    "height": 240,
+    "width": 600,
     "tabOrder": 200
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "Dim Product.product_name",
-              "nativeQueryRef": "product_name"
+              "nativeQueryRef": "product_name",
+              "active": true
             }
           ]
         },
@@ -38,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Total Production Units"
                 }
               },
-              "queryRef": "Measures.Total Production Units",
+              "queryRef": "KPI_Measures.Total Production Units",
               "nativeQueryRef": "Total Production Units"
             },
             {
@@ -52,13 +53,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Total Litres Produced"
                 }
               },
-              "queryRef": "Measures.Total Litres Produced",
+              "queryRef": "KPI_Measures.Total Litres Produced",
               "nativeQueryRef": "Total Litres Produced"
             }
           ]

@@ -1,36 +1,18 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "4114f23b9ac2d918d28c",
   "position": {
     "x": 24,
     "y": 76,
-    "width": 600,
-    "height": 276,
     "z": 300,
+    "height": 276,
+    "width": 600,
     "tabOrder": 300
   },
   "visual": {
     "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Rows": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Dim Date"
-                    }
-                  },
-                  "Property": "date"
-                }
-              },
-              "queryRef": "Dim Date.date",
-              "nativeQueryRef": "date"
-            }
-          ]
-        },
         "Columns": {
           "projections": [
             {
@@ -45,7 +27,27 @@
                 }
               },
               "queryRef": "Dim Product.product_name",
-              "nativeQueryRef": "product_name"
+              "nativeQueryRef": "product_name",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim Date"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "Dim Date.date",
+              "nativeQueryRef": "date",
+              "active": true
             }
           ]
         },
@@ -56,13 +58,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Total Production Units"
                 }
               },
-              "queryRef": "Measures.Total Production Units",
+              "queryRef": "KPI_Measures.Total Production Units",
               "nativeQueryRef": "Total Production Units"
             },
             {
@@ -70,13 +72,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Total Litres Produced"
                 }
               },
-              "queryRef": "Measures.Total Litres Produced",
+              "queryRef": "KPI_Measures.Total Litres Produced",
               "nativeQueryRef": "Total Litres Produced"
             },
             {
@@ -84,13 +86,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Operational Efficiency"
                 }
               },
-              "queryRef": "Measures.Operational Efficiency",
+              "queryRef": "KPI_Measures.Operational Efficiency",
               "nativeQueryRef": "Operational Efficiency"
             },
             {
@@ -98,13 +100,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Units per Operating Hour"
                 }
               },
-              "queryRef": "Measures.Units per Operating Hour",
+              "queryRef": "KPI_Measures.Units per Operating Hour",
               "nativeQueryRef": "Units per Operating Hour"
             }
           ]

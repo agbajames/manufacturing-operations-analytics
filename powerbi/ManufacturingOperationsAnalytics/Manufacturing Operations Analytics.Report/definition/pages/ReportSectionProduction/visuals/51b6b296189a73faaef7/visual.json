@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "51b6b296189a73faaef7",
   "position": {
     "x": 840,
     "y": 368,
-    "width": 416,
-    "height": 320,
     "z": 250,
+    "height": 320,
+    "width": 416,
     "tabOrder": 250
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Total Production Units"
                 }
               },
-              "queryRef": "Measures.Total Production Units",
+              "queryRef": "KPI_Measures.Total Production Units",
               "nativeQueryRef": "Total Production Units"
             }
           ]
@@ -92,6 +92,21 @@
           ]
         }
       }
+    },
+    "objects": {
+      "tree": [
+        {
+          "properties": {
+            "effectiveBarsPerLevel": {
+              "expr": {
+                "Literal": {
+                  "Value": "3L"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "visualContainerObjects": {
       "title": [

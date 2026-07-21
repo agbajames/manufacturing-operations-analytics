@@ -27,14 +27,15 @@ const id = (seed) => crypto.createHash('sha256').update(seed).digest('hex').slic
 const schema = 'https://developer.microsoft.com/json-schemas/fabric/item/report/definition';
 const visualSchema = `${schema}/visualContainer/2.9.0/schema.json`;
 const source = (table) => ({ SourceRef: { Entity: table } });
+const measureTable = 'KPI_Measures';
 const col = (table, property) => ({
   field: { Column: { Expression: source(table), Property: property } },
   queryRef: `${table}.${property}`,
   nativeQueryRef: property,
 });
 const measure = (property) => ({
-  field: { Measure: { Expression: source('Measures'), Property: property } },
-  queryRef: `Measures.${property}`,
+  field: { Measure: { Expression: source(measureTable), Property: property } },
+  queryRef: `${measureTable}.${property}`,
   nativeQueryRef: property,
 });
 const titleObject = (text) => ({
@@ -206,16 +207,20 @@ writeJson(path.join(model, 'definition.pbism'), {
   $schema: 'https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/definitionProperties/1.0.0/schema.json', version: '4.2', settings: { qnaEnabled: true },
 });
 write(path.join(model, 'definition', 'database.tmdl'), `database ManufacturingOperationsAnalytics\n\tcompatibilityLevel: 1702\n\tcompatibilityMode: powerBI\n\tlanguage: 1033\n`);
-write(path.join(model, 'definition', 'model.tmdl'), `model Model\n\tculture: en-GB\n\tdefaultPowerBIDataSourceVersion: powerBI_V3\n\tsourceQueryCulture: en-GB\n\ndiscourageImplicitMeasures\n\nref table 'Dim Date'\nref table 'Dim Product'\nref table 'Fact Daily Production'\nref table 'Fact Hourly Performance'\nref table 'Fact Downtime Events'\nref table 'Data Quality Report'\nref table Measures\n`);
+write(path.join(model, 'definition', 'model.tmdl'), `model Model\n\tculture: en-GB\n\tdefaultPowerBIDataSourceVersion: powerBI_V3\n\tsourceQueryCulture: en-GB\n\nref table 'Dim Date'\nref table 'Dim Product'\nref table 'Fact Daily Production'\nref table 'Fact Hourly Performance'\nref table 'Fact Downtime Events'\nref table 'Data Quality Report'\nref table ${measureTable}\n`);
 
 const githubBase = 'https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed';
-const typeM = { string: 'type text', int64: 'Int64.Type', double: 'type number', date: 'type date', datetime: 'type datetime', logical: 'type logical' };
+const typeM = { string: 'type text', int64: 'Int64.Type', double: 'type number', date: 'type datetime', datetime: 'type datetime', logical: 'type logical' };
+const tmdlType = { string: 'string', int64: 'int64', double: 'double', date: 'dateTime', datetime: 'dateTime', logical: 'boolean' };
 function tableTmdl(name, file, columns, options = {}) {
   const sortBy = { month_name: 'month_number', day_of_week: 'day_of_week_number', duration_band: 'duration_band_sort' };
-  const colDefs = columns.map(([n, t, hidden = false]) => `\tcolumn '${n}'\n\t\tdataType: ${t}\n${hidden ? '\t\tisHidden\n' : ''}\t\tsummarizeBy: none\n\t\tsourceColumn: ${n}${sortBy[n] ? `\n\t\tsortByColumn: ${sortBy[n]}` : ''}`).join('\n\n');
-  const calculatedColumns = name === 'Fact Downtime Events' ? `\n\n\tcolumn duration_band_sort = SWITCH ( [duration_band], \"<1 min\", 1, \"1–5 min\", 2, \"5–15 min\", 3, \"15–60 min\", 4, \"60+ min\", 5 )\n\t\tdataType: int64\n\t\tisHidden\n\t\tsummarizeBy: none` : '';
+  const colDefs = columns.map(([n, t, hidden = false]) => `\tcolumn '${n}'\n\t\tdataType: ${tmdlType[t] ?? 'string'}\n${hidden ? '\t\tisHidden\n' : ''}\t\tsummarizeBy: none\n\t\tsourceColumn: ${n}${sortBy[n] ? `\n\t\tsortByColumn: ${sortBy[n]}` : ''}`).join('\n\n');
+  const isDowntime = name === 'Fact Downtime Events';
+  const extraColumns = isDowntime ? `\n\n\tcolumn duration_band_sort\n\t\tdataType: int64\n\t\tisHidden\n\t\tsummarizeBy: none\n\t\tsourceColumn: duration_band_sort` : '';
+  const extraTransforms = isDowntime ? `,\n\t\t\t\tDurationBandSort = Table.AddColumn(Typed, \"duration_band_sort\", each if [reported_duration_minutes] < 1 then 1 else if [reported_duration_minutes] < 5 then 2 else if [reported_duration_minutes] < 15 then 3 else if [reported_duration_minutes] < 60 then 4 else 5, Int64.Type)` : '';
+  const finalStep = isDowntime ? 'DurationBandSort' : 'Typed';
   const transforms = columns.map(([n, t]) => `{\"${n}\", ${typeM[t] ?? 'type text'}}`).join(', ');
-  return `table '${name}'\n${options.dataCategory ? `\tdataCategory: ${options.dataCategory}\n` : ''}\n${colDefs}${calculatedColumns}\n\n\tpartition '${name}' = m\n\t\tmode: import\n\t\tsource =\n\t\t\tlet\n\t\t\t\tSource = Csv.Document(Web.Contents(\"${githubBase}/${file}\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n\t\t\t\tHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n\t\t\t\tTyped = Table.TransformColumnTypes(Headers, {${transforms}}, \"en-GB\")\n\t\t\tin\n\t\t\t\tTyped\n`;
+  return `table '${name}'\n${options.dataCategory ? `\tdataCategory: ${options.dataCategory}\n` : ''}\n${colDefs}${extraColumns}\n\n\tpartition '${name}' = m\n\t\tmode: import\n\t\tsource =\n\t\t\tlet\n\t\t\t\tSource = Csv.Document(Web.Contents(\"${githubBase}/${file}\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n\t\t\t\tHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n\t\t\t\tTyped = Table.TransformColumnTypes(Headers, {${transforms}}, \"en-GB\")${extraTransforms}\n\t\t\tin\n\t\t\t\t${finalStep}\n`;
 }
 const tables = [
   ['Dim Date', 'dim_date.csv', [['date_key','int64',true],['date','date'],['year','int64'],['quarter','string'],['month_number','int64'],['month_name','string'],['year_month','string'],['day_of_week_number','int64'],['day_of_week','string'],['is_weekend','logical']], { dataCategory: 'Time' }],
@@ -255,6 +260,6 @@ const measures = [
   ['Validated Downtime Events', "COUNTROWS ( 'Fact Downtime Events' )", '#,##0'],
 ];
 const measureDefs = measures.map(([name, dax, fmt]) => `\tmeasure '${name}' = ${dax}\n\t\tformatString: ${fmt}`).join('\n\n');
-write(path.join(model, 'definition', 'tables', 'Measures.tmdl'), `table Measures\n\n${measureDefs}\n\n\tcolumn Dummy\n\t\tdataType: string\n\t\tisHidden\n\t\tsourceColumn: [Dummy]\n\n\tpartition Measures = calculated\n\t\tmode: import\n\t\tsource = ROW ( \"Dummy\", BLANK () )\n`);
+write(path.join(model, 'definition', 'tables', `${measureTable}.tmdl`), `table ${measureTable}\n\n${measureDefs}\n\n\tcolumn Dummy\n\t\tdataType: string\n\t\tisHidden\n\t\tsourceColumn: [Dummy]\n\n\tpartition ${measureTable} = calculated\n\t\tmode: import\n\t\tsource = ROW ( \"Dummy\", BLANK () )\n`);
 
 console.log(`Built ${pageDefs.length} report pages at ${root}`);

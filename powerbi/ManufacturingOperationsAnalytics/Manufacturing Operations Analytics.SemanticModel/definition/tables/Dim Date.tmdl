@@ -1,65 +1,77 @@
 table 'Dim Date'
+	lineageTag: dd93da8c-aaa0-44ce-a808-da87e19e6176
 	dataCategory: Time
 
-	column 'date_key'
+	column date_key
 		dataType: int64
 		isHidden
+		lineageTag: 840eef25-0a76-4e88-b6f8-ee4cb8722d92
 		summarizeBy: none
 		sourceColumn: date_key
 
-	column 'date'
-		dataType: date
+	column date
+		dataType: dateTime
+		lineageTag: 79b3d5e2-d233-4c56-aba6-6b0e83aa60d4
 		summarizeBy: none
 		sourceColumn: date
 
-	column 'year'
+	column year
 		dataType: int64
+		lineageTag: f664479c-edc4-4327-b9fb-477f98345125
 		summarizeBy: none
 		sourceColumn: year
 
-	column 'quarter'
+	column quarter
 		dataType: string
+		lineageTag: 88489443-ea90-47c9-9a5a-081e76a03998
 		summarizeBy: none
 		sourceColumn: quarter
 
-	column 'month_number'
+	column month_number
 		dataType: int64
+		lineageTag: fdeafc76-9fb8-4e5f-b3ee-62e910c83ede
 		summarizeBy: none
 		sourceColumn: month_number
 
-	column 'month_name'
+	column month_name
 		dataType: string
+		lineageTag: b866e8b6-d3f3-42bc-8c9b-22921be16e20
 		summarizeBy: none
 		sourceColumn: month_name
 		sortByColumn: month_number
 
-	column 'year_month'
+	column year_month
 		dataType: string
+		lineageTag: 2e48d8c9-3a34-4e34-8354-945260db7d88
 		summarizeBy: none
 		sourceColumn: year_month
 
-	column 'day_of_week_number'
+	column day_of_week_number
 		dataType: int64
+		lineageTag: f7232fbd-b162-4006-8cf6-cfc024dca7e4
 		summarizeBy: none
 		sourceColumn: day_of_week_number
 
-	column 'day_of_week'
+	column day_of_week
 		dataType: string
+		lineageTag: 4a5118c5-0236-457f-b57d-564d78e7ec69
 		summarizeBy: none
 		sourceColumn: day_of_week
 		sortByColumn: day_of_week_number
 
-	column 'is_weekend'
-		dataType: logical
+	column is_weekend
+		dataType: boolean
+		lineageTag: ff3e7ab0-4889-4a40-b7ca-e53f8a34616c
 		summarizeBy: none
 		sourceColumn: is_weekend
 
 	partition 'Dim Date' = m
 		mode: import
 		source =
-			let
-				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/dim_date.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				Typed = Table.TransformColumnTypes(Headers, {{"date_key", Int64.Type}, {"date", type date}, {"year", Int64.Type}, {"quarter", type text}, {"month_number", Int64.Type}, {"month_name", type text}, {"year_month", type text}, {"day_of_week_number", Int64.Type}, {"day_of_week", type text}, {"is_weekend", type logical}}, "en-GB")
-			in
-				Typed
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/dim_date.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Headers, {{"date_key", Int64.Type}, {"date", type datetime}, {"year", Int64.Type}, {"quarter", type text}, {"month_number", Int64.Type}, {"month_name", type text}, {"year_month", type text}, {"day_of_week_number", Int64.Type}, {"day_of_week", type text}, {"is_weekend", type logical}}, "en-GB")
+				in
+					Typed
+

@@ -1,46 +1,55 @@
 table 'Data Quality Report'
+	lineageTag: 98d06a17-6f50-456c-9c10-22228f354f5d
 
-	column 'check_name'
+	column check_name
 		dataType: string
+		lineageTag: 30e4a2d2-8389-4ff6-bf19-8c8dec96ddb7
 		summarizeBy: none
 		sourceColumn: check_name
 
-	column 'severity'
+	column severity
 		dataType: string
+		lineageTag: 8e23cfd8-1551-4caa-a7c5-8bbdcf02ca7d
 		summarizeBy: none
 		sourceColumn: severity
 
-	column 'status'
+	column status
 		dataType: string
+		lineageTag: 5e98804b-420a-4dd3-acc1-b33dfa14941f
 		summarizeBy: none
 		sourceColumn: status
 
-	column 'affected_rows'
+	column affected_rows
 		dataType: int64
+		lineageTag: 939c4e88-a2bb-4057-8d8c-64493f6889e0
 		summarizeBy: none
 		sourceColumn: affected_rows
 
-	column 'rows_tested'
+	column rows_tested
 		dataType: int64
+		lineageTag: f0c93d43-01bf-43f6-8908-62aab92a0729
 		summarizeBy: none
 		sourceColumn: rows_tested
 
-	column 'affected_pct'
+	column affected_pct
 		dataType: double
+		lineageTag: 66b159d0-56f2-4b65-8f31-e9ebd9948d60
 		summarizeBy: none
 		sourceColumn: affected_pct
 
-	column 'rule'
+	column rule
 		dataType: string
+		lineageTag: 080ecb15-d985-4b93-a3dd-df1e9adc4568
 		summarizeBy: none
 		sourceColumn: rule
 
 	partition 'Data Quality Report' = m
 		mode: import
 		source =
-			let
-				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/data_quality_report.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				Typed = Table.TransformColumnTypes(Headers, {{"check_name", type text}, {"severity", type text}, {"status", type text}, {"affected_rows", Int64.Type}, {"rows_tested", Int64.Type}, {"affected_pct", type number}, {"rule", type text}}, "en-GB")
-			in
-				Typed
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/data_quality_report.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Headers, {{"check_name", type text}, {"severity", type text}, {"status", type text}, {"affected_rows", Int64.Type}, {"rows_tested", Int64.Type}, {"affected_pct", type number}, {"rule", type text}}, "en-GB")
+				in
+					Typed
+

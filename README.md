@@ -4,15 +4,27 @@
 [![Tests](https://github.com/agbajames/manufacturing-operations-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/agbajames/manufacturing-operations-analytics/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-2BAE9B.svg)](LICENSE)
 
-An end-to-end manufacturing analytics project that uses Python and SQL to transform real industrial filling-line data into an auditable star schema for production, efficiency and downtime analysis. The repository includes an editable Power BI Project (`.pbip`) with a TMDL semantic model, four PBIR report pages and data-backed page previews.
+An end-to-end manufacturing analytics project that uses Python and SQL to transform real industrial filling-line data into an auditable star schema for production, efficiency and downtime analysis. The repository includes an editable Power BI Project (`.pbip`) with a TMDL semantic model, four PBIR report pages and screenshots captured from Power BI Desktop.
 
-![Analytical review workbook preview](assets/workbook_preview.png)
+## Power BI report pages
 
-![Power BI Executive Overview preview](assets/powerbi/01-executive-overview.png)
+![Analytical workbook preview](assets/workbook_preview.png)
 
-## Implementation status
+### Executive Overview
 
-Completed deliverables include the tested ETL pipeline, processed star-schema tables, SQLite database, PostgreSQL scripts, analytical review workbook, reusable DAX measures, and an editable Power BI Project. The PBIR definition validates with Microsoft's report-authoring CLI. A native `.pbix`/`.pbit` still requires Power BI Desktop on Windows; the checked-in screenshots are explicitly labelled data-backed design previews until that Desktop render is completed.
+![Power BI Executive Overview](assets/powerbi/01-executive-overview.png)
+
+### Production Performance
+
+![Power BI Production Performance](assets/powerbi/02-production-performance.png)
+
+### Downtime Analysis
+
+![Power BI Downtime Analysis](assets/powerbi/03-downtime-analysis.png)
+
+### Data Quality & Governance
+
+![Power BI Data Quality and Governance](assets/powerbi/04-data-quality-governance.png)
 
 ## Business problem
 

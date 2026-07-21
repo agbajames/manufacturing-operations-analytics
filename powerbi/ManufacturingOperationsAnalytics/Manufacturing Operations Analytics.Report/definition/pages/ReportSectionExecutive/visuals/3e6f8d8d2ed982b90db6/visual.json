@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "3e6f8d8d2ed982b90db6",
   "position": {
     "x": 640,
     "y": 194,
-    "width": 616,
-    "height": 238,
     "z": 200,
+    "height": 238,
+    "width": 616,
     "tabOrder": 200
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "Dim Date.year_month",
-              "nativeQueryRef": "year_month"
+              "nativeQueryRef": "year_month",
+              "active": true
             }
           ]
         },
@@ -38,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Operating Hours"
                 }
               },
-              "queryRef": "Measures.Operating Hours",
+              "queryRef": "KPI_Measures.Operating Hours",
               "nativeQueryRef": "Operating Hours"
             },
             {
@@ -52,13 +53,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Downtime Hours"
                 }
               },
-              "queryRef": "Measures.Downtime Hours",
+              "queryRef": "KPI_Measures.Downtime Hours",
               "nativeQueryRef": "Downtime Hours"
             }
           ]

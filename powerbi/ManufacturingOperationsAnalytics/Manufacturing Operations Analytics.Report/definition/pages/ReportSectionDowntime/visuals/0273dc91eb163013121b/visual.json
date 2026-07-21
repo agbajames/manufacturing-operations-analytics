@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Downtime Events"
                 }
               },
-              "queryRef": "Measures.Downtime Events",
+              "queryRef": "KPI_Measures.Downtime Events",
               "nativeQueryRef": "Downtime Events"
             },
             {
@@ -34,13 +34,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Event Downtime Minutes"
                 }
               },
-              "queryRef": "Measures.Event Downtime Minutes",
+              "queryRef": "KPI_Measures.Event Downtime Minutes",
               "nativeQueryRef": "Event Downtime Minutes"
             },
             {
@@ -48,13 +48,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Average Event Duration Minutes"
                 }
               },
-              "queryRef": "Measures.Average Event Duration Minutes",
+              "queryRef": "KPI_Measures.Average Event Duration Minutes",
               "nativeQueryRef": "Average Event Duration Minutes"
             },
             {
@@ -62,13 +62,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Median Event Duration Minutes"
                 }
               },
-              "queryRef": "Measures.Median Event Duration Minutes",
+              "queryRef": "KPI_Measures.Median Event Duration Minutes",
               "nativeQueryRef": "Median Event Duration Minutes"
             },
             {
@@ -76,13 +76,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Long Stop Event Rate"
                 }
               },
-              "queryRef": "Measures.Long Stop Event Rate",
+              "queryRef": "KPI_Measures.Long Stop Event Rate",
               "nativeQueryRef": "Long Stop Event Rate"
             }
           ]

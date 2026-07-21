@@ -1,68 +1,83 @@
 table 'Fact Downtime Events'
+	lineageTag: 5da22a3c-701e-4725-9958-660e9fb7e78f
 
-	column 'downtime_id'
+	column downtime_id
 		dataType: string
+		lineageTag: 3aeafe0c-910b-4ba1-ad86-43e215a40a43
 		summarizeBy: none
 		sourceColumn: downtime_id
 
-	column 'date_key'
+	column date_key
 		dataType: int64
 		isHidden
+		lineageTag: 52b0c3af-d77c-451c-956f-e020a0b00c3c
 		summarizeBy: none
 		sourceColumn: date_key
 
-	column 'date'
-		dataType: date
+	column date
+		dataType: dateTime
+		lineageTag: 4b699c1d-64d6-4e3e-86f5-b906bc825a53
 		summarizeBy: none
 		sourceColumn: date
 
-	column 'downtime_start_ts'
-		dataType: datetime
+	column downtime_start_ts
+		dataType: dateTime
+		lineageTag: 736ec382-9701-4360-9468-1a4ec8ebc92c
 		summarizeBy: none
 		sourceColumn: downtime_start_ts
 
-	column 'downtime_end_ts'
-		dataType: datetime
+	column downtime_end_ts
+		dataType: dateTime
+		lineageTag: dc9d2b13-03d5-4b9b-80fa-abcc49b63083
 		summarizeBy: none
 		sourceColumn: downtime_end_ts
 
-	column 'start_hour'
+	column start_hour
 		dataType: int64
+		lineageTag: 16b53200-a3f8-4a9f-b4da-5b54b838d808
 		summarizeBy: none
 		sourceColumn: start_hour
 
-	column 'reported_duration_minutes'
+	column reported_duration_minutes
 		dataType: double
+		lineageTag: 94c72046-8ffa-4edc-b8cb-07d7104b1404
 		summarizeBy: none
 		sourceColumn: reported_duration_minutes
 
-	column 'calculated_duration_minutes'
+	column calculated_duration_minutes
 		dataType: double
+		lineageTag: 36dbb6b6-402a-4ecb-9fc2-04a7a0b78422
 		summarizeBy: none
 		sourceColumn: calculated_duration_minutes
 
-	column 'duration_variance_seconds'
+	column duration_variance_seconds
 		dataType: double
+		lineageTag: bccfd052-67d6-48e7-85cd-cbd19e101b95
 		summarizeBy: none
 		sourceColumn: duration_variance_seconds
 
-	column 'duration_band'
+	column duration_band
 		dataType: string
+		lineageTag: 566ac77f-6980-456c-98f5-2cae8e526a4f
 		summarizeBy: none
 		sourceColumn: duration_band
 		sortByColumn: duration_band_sort
 
-	column duration_band_sort = SWITCH ( [duration_band], "<1 min", 1, "1–5 min", 2, "5–15 min", 3, "15–60 min", 4, "60+ min", 5 )
+	column duration_band_sort
 		dataType: int64
 		isHidden
+		lineageTag: b93d0e83-f445-48da-8a21-c1dfe700a284
 		summarizeBy: none
+		sourceColumn: duration_band_sort
 
 	partition 'Fact Downtime Events' = m
 		mode: import
 		source =
-			let
-				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/fact_downtime_events.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				Typed = Table.TransformColumnTypes(Headers, {{"downtime_id", type text}, {"date_key", Int64.Type}, {"date", type date}, {"downtime_start_ts", type datetime}, {"downtime_end_ts", type datetime}, {"start_hour", Int64.Type}, {"reported_duration_minutes", type number}, {"calculated_duration_minutes", type number}, {"duration_variance_seconds", type number}, {"duration_band", type text}}, "en-GB")
-			in
-				Typed
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/fact_downtime_events.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Headers, {{"downtime_id", type text}, {"date_key", Int64.Type}, {"date", type datetime}, {"downtime_start_ts", type datetime}, {"downtime_end_ts", type datetime}, {"start_hour", Int64.Type}, {"reported_duration_minutes", type number}, {"calculated_duration_minutes", type number}, {"duration_variance_seconds", type number}, {"duration_band", type text}}, "en-GB"),
+					DurationBandSort = Table.AddColumn(Typed, "duration_band_sort", each if [reported_duration_minutes] < 1 then 1 else if [reported_duration_minutes] < 5 then 2 else if [reported_duration_minutes] < 15 then 3 else if [reported_duration_minutes] < 60 then 4 else 5, Int64.Type)
+				in
+					DurationBandSort
+

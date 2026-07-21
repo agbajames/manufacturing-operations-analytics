@@ -1,92 +1,110 @@
 table 'Fact Hourly Performance'
+	lineageTag: 2c2f1df8-f6f6-46ba-8b08-e1fa6983e8f7
 
-	column 'hour_key'
+	column hour_key
 		dataType: int64
+		lineageTag: da8bced0-5bf2-40bc-b849-d21eadfa437c
 		summarizeBy: none
 		sourceColumn: hour_key
 
-	column 'date_key'
+	column date_key
 		dataType: int64
 		isHidden
+		lineageTag: c1586286-1c30-4622-89c6-62003c601509
 		summarizeBy: none
 		sourceColumn: date_key
 
-	column 'date'
-		dataType: date
+	column date
+		dataType: dateTime
+		lineageTag: 10b1f54d-2044-43b0-a466-3fb62703f0f6
 		summarizeBy: none
 		sourceColumn: date
 
-	column 'hour_start'
+	column hour_start
 		dataType: int64
+		lineageTag: 246d8c32-0c6c-444c-80a6-ed5667387cf9
 		summarizeBy: none
 		sourceColumn: hour_start
 
-	column 'hour_end'
+	column hour_end
 		dataType: int64
+		lineageTag: 8fdc42e2-4587-4dfe-bfca-c34be43d7c6c
 		summarizeBy: none
 		sourceColumn: hour_end
 
-	column 'hour_start_ts'
-		dataType: datetime
+	column hour_start_ts
+		dataType: dateTime
+		lineageTag: 9a7acdf0-f7ab-4f43-9b21-b0c467117ea4
 		summarizeBy: none
 		sourceColumn: hour_start_ts
 
-	column 'hour_end_ts'
-		dataType: datetime
+	column hour_end_ts
+		dataType: dateTime
+		lineageTag: ec184e36-668b-456d-a7d5-2102e815a7ae
 		summarizeBy: none
 		sourceColumn: hour_end_ts
 
-	column 'production_units_reported'
+	column production_units_reported
 		dataType: double
+		lineageTag: 6236fb2e-7205-4477-ae16-e02050fb7eab
 		summarizeBy: none
 		sourceColumn: production_units_reported
 
-	column 'operation_record_count'
+	column operation_record_count
 		dataType: double
+		lineageTag: 59ae72e1-4a1b-4aec-a10b-af0bb866781a
 		summarizeBy: none
 		sourceColumn: operation_record_count
 
-	column 'monitored_time_h'
+	column monitored_time_h
 		dataType: double
+		lineageTag: 7d89abec-cd84-4357-bad8-2c1679f7565c
 		summarizeBy: none
 		sourceColumn: monitored_time_h
 
-	column 'operation_time_h'
+	column operation_time_h
 		dataType: double
+		lineageTag: 1885e73e-47dc-4471-93b5-437784723662
 		summarizeBy: none
 		sourceColumn: operation_time_h
 
-	column 'downtime_h'
+	column downtime_h
 		dataType: double
+		lineageTag: 4bbad356-a2df-4255-8e70-8b0a784cdbdb
 		summarizeBy: none
 		sourceColumn: downtime_h
 
-	column 'published_efficiency'
+	column published_efficiency
 		dataType: double
+		lineageTag: e3732e14-2111-47e7-8992-8396f983d754
 		summarizeBy: none
 		sourceColumn: published_efficiency
 
-	column 'calculated_efficiency'
+	column calculated_efficiency
 		dataType: double
+		lineageTag: 940f7143-34e1-445b-a6f6-fedaf504c62c
 		summarizeBy: none
 		sourceColumn: calculated_efficiency
 
-	column 'time_reconciliation_variance_h'
+	column time_reconciliation_variance_h
 		dataType: double
+		lineageTag: 8fe6e6db-7f71-45bf-9a5e-bc0397ad4090
 		summarizeBy: none
 		sourceColumn: time_reconciliation_variance_h
 
-	column 'source_coverage'
+	column source_coverage
 		dataType: string
+		lineageTag: 784ae987-1e64-4056-8a68-1cb04073052a
 		summarizeBy: none
 		sourceColumn: source_coverage
 
 	partition 'Fact Hourly Performance' = m
 		mode: import
 		source =
-			let
-				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/fact_hourly_performance.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				Typed = Table.TransformColumnTypes(Headers, {{"hour_key", Int64.Type}, {"date_key", Int64.Type}, {"date", type date}, {"hour_start", Int64.Type}, {"hour_end", Int64.Type}, {"hour_start_ts", type datetime}, {"hour_end_ts", type datetime}, {"production_units_reported", type number}, {"operation_record_count", type number}, {"monitored_time_h", type number}, {"operation_time_h", type number}, {"downtime_h", type number}, {"published_efficiency", type number}, {"calculated_efficiency", type number}, {"time_reconciliation_variance_h", type number}, {"source_coverage", type text}}, "en-GB")
-			in
-				Typed
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/fact_hourly_performance.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Headers, {{"hour_key", Int64.Type}, {"date_key", Int64.Type}, {"date", type datetime}, {"hour_start", Int64.Type}, {"hour_end", Int64.Type}, {"hour_start_ts", type datetime}, {"hour_end_ts", type datetime}, {"production_units_reported", type number}, {"operation_record_count", type number}, {"monitored_time_h", type number}, {"operation_time_h", type number}, {"downtime_h", type number}, {"published_efficiency", type number}, {"calculated_efficiency", type number}, {"time_reconciliation_variance_h", type number}, {"source_coverage", type text}}, "en-GB")
+				in
+					Typed
+

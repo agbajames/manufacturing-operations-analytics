@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.1.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
   "themeCollection": {
     "customTheme": {
       "name": "ManufacturingOperationsAnalytics.json",
@@ -10,6 +10,21 @@
       },
       "type": "RegisteredResources"
     }
+  },
+  "objects": {
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
   },
   "resourcePackages": [
     {
@@ -25,8 +40,9 @@
     }
   ],
   "settings": {
+    "useStylableVisualContainerHeader": true,
     "defaultDrillFilterOtherVisuals": true,
     "allowChangeFilterTypes": true,
-    "useStylableVisualContainerHeader": true
+    "useEnhancedTooltips": false
   }
 }

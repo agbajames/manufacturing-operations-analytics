@@ -1,32 +1,38 @@
 table 'Dim Product'
+	lineageTag: 9686ff2e-fffe-4366-b0c7-654bd3747be3
 
-	column 'product_key'
+	column product_key
 		dataType: string
 		isHidden
+		lineageTag: c75c9531-bea5-4ca4-b327-fa10434c3d24
 		summarizeBy: none
 		sourceColumn: product_key
 
-	column 'product_type_l'
+	column product_type_l
 		dataType: int64
+		lineageTag: 095c275d-3d3f-4005-aac1-1771a0c8f25a
 		summarizeBy: none
 		sourceColumn: product_type_l
 
-	column 'product_name'
+	column product_name
 		dataType: string
+		lineageTag: b6d7688c-47dd-4a63-98a9-cce465fa6772
 		summarizeBy: none
 		sourceColumn: product_name
 
-	column 'volume_litres_per_unit'
+	column volume_litres_per_unit
 		dataType: int64
+		lineageTag: e53e85b4-663d-4356-890d-5a712c4232b3
 		summarizeBy: none
 		sourceColumn: volume_litres_per_unit
 
 	partition 'Dim Product' = m
 		mode: import
 		source =
-			let
-				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/dim_product.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				Typed = Table.TransformColumnTypes(Headers, {{"product_key", type text}, {"product_type_l", Int64.Type}, {"product_name", type text}, {"volume_litres_per_unit", Int64.Type}}, "en-GB")
-			in
-				Typed
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/dim_product.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Headers, {{"product_key", type text}, {"product_type_l", Int64.Type}, {"product_name", type text}, {"volume_litres_per_unit", Int64.Type}}, "en-GB")
+				in
+					Typed
+

@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "ae0b5e7708295328e22d",
   "position": {
     "x": 640,
     "y": 76,
-    "width": 616,
-    "height": 276,
     "z": 200,
+    "height": 276,
+    "width": 616,
     "tabOrder": 200
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "Fact Hourly Performance.hour_start",
-              "nativeQueryRef": "hour_start"
+              "nativeQueryRef": "hour_start",
+              "active": true
             }
           ]
         },
@@ -38,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Hourly Reported Output"
                 }
               },
-              "queryRef": "Measures.Hourly Reported Output",
+              "queryRef": "KPI_Measures.Hourly Reported Output",
               "nativeQueryRef": "Hourly Reported Output"
             }
           ]

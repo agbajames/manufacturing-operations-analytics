@@ -1,79 +1,105 @@
-table Measures
+table KPI_Measures
+	lineageTag: 1c4d10a7-8fde-4bce-ae59-5f761e943926
 
 	measure 'Total Production Units' = SUM ( 'Fact Daily Production'[production_units] )
 		formatString: #,##0
+		lineageTag: 66a4653a-973b-4d21-b466-a2ef42af2907
 
 	measure 'Total Litres Produced' = SUM ( 'Fact Daily Production'[liters_produced] )
 		formatString: #,##0
+		lineageTag: c4cf8ce0-ea52-4fd4-9a85-e0cf96163143
 
 	measure 'Production Days' = DISTINCTCOUNT ( 'Fact Daily Production'[date_key] )
 		formatString: #,##0
+		lineageTag: 2adad194-9b51-4a64-a20a-d4cf3bb0ff7a
 
 	measure 'Monitored Hours' = SUM ( 'Fact Daily Production'[monitored_hours] )
 		formatString: #,##0.0
+		lineageTag: d3bb8d8b-a68e-4aa4-9211-73786e7e2b34
 
 	measure 'Operating Hours' = SUM ( 'Fact Daily Production'[operating_hours] )
 		formatString: #,##0.0
+		lineageTag: d53b3eae-6e74-4aad-8052-25e615d4ea62
 
 	measure 'Downtime Hours' = SUM ( 'Fact Daily Production'[downtime_hours] )
 		formatString: #,##0.0
+		lineageTag: abbd7094-6588-4cac-82c4-3d8dfa217f8a
 
 	measure 'Operational Efficiency' = DIVIDE ( [Operating Hours], [Monitored Hours] )
 		formatString: 0.0%
+		lineageTag: fb88b2f4-2a9e-4363-9880-136024943a30
 
 	measure 'Units per Operating Hour' = DIVIDE ( [Total Production Units], [Operating Hours] )
 		formatString: #,##0.0
+		lineageTag: f80e1aaa-7075-4e6e-a2e4-2deae5c9accf
 
 	measure 'Downtime Events' = DISTINCTCOUNT ( 'Fact Downtime Events'[downtime_id] )
 		formatString: #,##0
+		lineageTag: a0551a29-bb32-4a14-a809-3efdd85ade77
 
 	measure 'Event Downtime Minutes' = SUM ( 'Fact Downtime Events'[reported_duration_minutes] )
 		formatString: #,##0.0
+		lineageTag: 60f527a2-a69b-41b0-8abb-c3e708dd9067
 
 	measure 'Average Event Duration Minutes' = AVERAGE ( 'Fact Downtime Events'[reported_duration_minutes] )
 		formatString: #,##0.0
+		lineageTag: 61c62e5c-a12c-4e6b-87b3-9fee1bccf11c
 
 	measure 'Median Event Duration Minutes' = MEDIAN ( 'Fact Downtime Events'[reported_duration_minutes] )
 		formatString: #,##0.0
+		lineageTag: 813ce19d-58b1-4ee7-964e-25b0ca449a3b
 
 	measure 'Long Stop Events' = CALCULATE ( [Downtime Events], 'Fact Downtime Events'[reported_duration_minutes] >= 15 )
 		formatString: #,##0
+		lineageTag: 6a640040-ac94-4f48-897d-8b3eee398943
 
 	measure 'Long Stop Event Rate' = DIVIDE ( [Long Stop Events], [Downtime Events] )
 		formatString: 0.0%
+		lineageTag: 5a8d55a5-420c-4dfc-a336-493508407627
 
 	measure 'Hourly Records' = COUNTROWS ( 'Fact Hourly Performance' )
 		formatString: #,##0
+		lineageTag: 6bef9f8d-6498-4a33-8b67-3883f0a53e6b
 
 	measure 'Hourly Reported Output' = SUM ( 'Fact Hourly Performance'[production_units_reported] )
 		formatString: #,##0
+		lineageTag: 1f9de3bd-57c4-481e-858c-a303a3b39217
 
 	measure 'Hourly Calculated Efficiency' = DIVIDE ( SUM ( 'Fact Hourly Performance'[operation_time_h] ), SUM ( 'Fact Hourly Performance'[monitored_time_h] ) )
 		formatString: 0.0%
+		lineageTag: d5c35888-e5b9-4097-bc95-6caffe55a3a4
 
 	measure 'Matched Hourly Records' = CALCULATE ( [Hourly Records], 'Fact Hourly Performance'[source_coverage] = "Both" )
 		formatString: #,##0
+		lineageTag: 2ed46a26-9941-4bb9-877c-28ac095ed14d
 
 	measure 'Hourly Source Match Rate' = DIVIDE ( [Matched Hourly Records], [Hourly Records] )
 		formatString: 0.0%
+		lineageTag: ebc1d8fd-ac29-4ea2-8d12-bf6cc7d1f9b1
 
 	measure 'Quality Checks Requiring Review' = CALCULATE ( COUNTROWS ( 'Data Quality Report' ), 'Data Quality Report'[status] = "REVIEW" )
 		formatString: #,##0
+		lineageTag: ad47be31-e46a-4ca5-bf19-bf2e5384c895
 
 	measure 'Validated Daily Rows' = COUNTROWS ( 'Fact Daily Production' )
 		formatString: #,##0
+		lineageTag: f0726d38-43ee-4eef-b440-2fe0f5ee1390
 
 	measure 'Validated Hourly Rows' = COUNTROWS ( 'Fact Hourly Performance' )
 		formatString: #,##0
+		lineageTag: 520ef1ba-d830-4131-af6f-e2dd27df7d4e
 
 	measure 'Validated Downtime Events' = COUNTROWS ( 'Fact Downtime Events' )
 		formatString: #,##0
+		lineageTag: dd1e509c-6efd-497c-bca6-5ff8ff40157d
 
 	column Dummy
 		dataType: string
 		isHidden
+		lineageTag: 8fe6878f-659f-4f2c-8e0a-34ae4211a9dc
 		sourceColumn: [Dummy]
 
-	partition Measures = calculated
+	partition KPI_Measures = calculated
 		mode: import
 		source = ROW ( "Dummy", BLANK () )
+

@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Hourly Source Match Rate"
                 }
               },
-              "queryRef": "Measures.Hourly Source Match Rate",
+              "queryRef": "KPI_Measures.Hourly Source Match Rate",
               "nativeQueryRef": "Hourly Source Match Rate"
             }
           ]

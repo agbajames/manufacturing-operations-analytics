@@ -34,13 +34,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Total Production Units"
                 }
               },
-              "queryRef": "Measures.Total Production Units",
+              "queryRef": "KPI_Measures.Total Production Units",
               "nativeQueryRef": "Total Production Units"
             },
             {
@@ -48,13 +48,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Operational Efficiency"
                 }
               },
-              "queryRef": "Measures.Operational Efficiency",
+              "queryRef": "KPI_Measures.Operational Efficiency",
               "nativeQueryRef": "Operational Efficiency"
             },
             {
@@ -62,13 +62,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "Downtime Hours"
                 }
               },
-              "queryRef": "Measures.Downtime Hours",
+              "queryRef": "KPI_Measures.Downtime Hours",
               "nativeQueryRef": "Downtime Hours"
             }
           ]

@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "e8a241d87f69bbf0a574",
   "position": {
     "x": 1050,
     "y": 10,
-    "width": 206,
-    "height": 80,
     "z": 50,
+    "height": 80,
+    "width": 206,
     "tabOrder": 50
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "Dim Product.product_name",
-              "nativeQueryRef": "product_name"
+              "nativeQueryRef": "product_name",
+              "active": true
             }
           ]
         }

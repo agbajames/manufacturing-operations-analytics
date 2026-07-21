@@ -13,3 +13,4 @@ relationship 'Downtime to Date'
 relationship 'Daily to Product'
 	fromColumn: 'Fact Daily Production'.product_key
 	toColumn: 'Dim Product'.product_key
+
