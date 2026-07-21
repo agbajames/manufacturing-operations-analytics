@@ -1,0 +1,87 @@
+// Core production measures
+Total Production Units =
+SUM ( 'Fact Daily Production'[production_units] )
+
+Total Litres Produced =
+SUM ( 'Fact Daily Production'[liters_produced] )
+
+Production Days =
+DISTINCTCOUNT ( 'Fact Daily Production'[date_key] )
+
+Monitored Hours =
+SUM ( 'Fact Daily Production'[monitored_hours] )
+
+Operating Hours =
+SUM ( 'Fact Daily Production'[operating_hours] )
+
+Downtime Hours =
+SUM ( 'Fact Daily Production'[downtime_hours] )
+
+Operational Efficiency =
+DIVIDE ( [Operating Hours], [Monitored Hours] )
+
+Downtime Share =
+DIVIDE ( [Downtime Hours], [Monitored Hours] )
+
+Units per Operating Hour =
+DIVIDE ( [Total Production Units], [Operating Hours] )
+
+Average Daily Output =
+DIVIDE ( [Total Production Units], [Production Days] )
+
+// Downtime-event measures
+Downtime Events =
+DISTINCTCOUNT ( 'Fact Downtime Events'[downtime_id] )
+
+Event Downtime Minutes =
+SUM ( 'Fact Downtime Events'[reported_duration_minutes] )
+
+Average Event Duration Minutes =
+AVERAGE ( 'Fact Downtime Events'[reported_duration_minutes] )
+
+Median Event Duration Minutes =
+MEDIAN ( 'Fact Downtime Events'[reported_duration_minutes] )
+
+Maximum Event Duration Minutes =
+MAX ( 'Fact Downtime Events'[reported_duration_minutes] )
+
+Long Stop Events =
+CALCULATE (
+    [Downtime Events],
+    'Fact Downtime Events'[reported_duration_minutes] >= 15
+)
+
+Long Stop Event Rate =
+DIVIDE ( [Long Stop Events], [Downtime Events] )
+
+// Time intelligence
+Prior Month Efficiency =
+CALCULATE ( [Operational Efficiency], DATEADD ( 'Dim Date'[date], -1, MONTH ) )
+
+Efficiency MoM Change =
+[Operational Efficiency] - [Prior Month Efficiency]
+
+Prior Month Production Units =
+CALCULATE ( [Total Production Units], DATEADD ( 'Dim Date'[date], -1, MONTH ) )
+
+Production Units MoM Change % =
+DIVIDE ( [Total Production Units] - [Prior Month Production Units], [Prior Month Production Units] )
+
+// Model health measures
+Hourly Records =
+COUNTROWS ( 'Fact Hourly Performance' )
+
+Matched Hourly Records =
+CALCULATE (
+    [Hourly Records],
+    'Fact Hourly Performance'[source_coverage] = "Both"
+)
+
+Hourly Source Match Rate =
+DIVIDE ( [Matched Hourly Records], [Hourly Records] )
+
+Quality Checks Requiring Review =
+CALCULATE (
+    COUNTROWS ( 'Data Quality Report' ),
+    'Data Quality Report'[status] = "REVIEW"
+)

@@ -1,0 +1,35 @@
+{
+  "source": {
+    "title": "Industrial Production Time-Series Dataset from a Beverage Bottling Line",
+    "url": "https://zenodo.org/records/18146866",
+    "license": "CC BY 4.0",
+    "md5": "d9c095d5eba8706ac7dda92af63f5c35"
+  },
+  "coverage": {
+    "start_date": "2022-07-22",
+    "end_date": "2023-02-10",
+    "production_days": 56,
+    "daily_rows": 59,
+    "hourly_rows": 275,
+    "downtime_events": 1388
+  },
+  "kpis": {
+    "production_units": 60888,
+    "litres_produced": 212358,
+    "monitored_hours": 238.655,
+    "operating_hours": 101.809,
+    "downtime_hours": 137.564,
+    "weighted_operational_efficiency": 0.426595,
+    "units_per_operating_hour": 598.061,
+    "average_event_duration_minutes": 5.702,
+    "median_event_duration_minutes": 1.501
+  },
+  "highlights": {
+    "best_efficiency_date": "2022-12-23",
+    "best_efficiency": 0.813885,
+    "worst_efficiency_date": "2022-12-19",
+    "worst_efficiency": 0.153845,
+    "highest_output_date": "2022-07-22",
+    "highest_daily_units": 2849
+  }
+}

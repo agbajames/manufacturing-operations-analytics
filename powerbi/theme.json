@@ -1,0 +1,23 @@
+{
+  "name": "Manufacturing Operations Analytics",
+  "dataColors": ["#0B3A53", "#157A8A", "#2BAE9B", "#F2B134", "#D95D39", "#738290"],
+  "background": "#F5F7F8",
+  "foreground": "#172A3A",
+  "tableAccent": "#157A8A",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [{"show": true, "fontFamily": "Segoe UI Semibold", "fontSize": 12, "fontColor": {"solid": {"color": "#172A3A"}}}],
+        "background": [{"show": true, "color": {"solid": {"color": "#FFFFFF"}}, "transparency": 0}],
+        "border": [{"show": true, "color": {"solid": {"color": "#D8E1E5"}}, "radius": 6}],
+        "visualHeader": [{"show": true}]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [{"fontFamily": "Segoe UI Semibold", "fontSize": 22, "color": {"solid": {"color": "#0B3A53"}}}],
+        "categoryLabels": [{"fontFamily": "Segoe UI", "fontSize": 10, "color": {"solid": {"color": "#526672"}}}]
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+check_name,severity,status,affected_rows,rows_tested,affected_pct,rule
+Daily duplicate business key,Error,PASS,0,59,0.0,date_key + product_key must be unique
+Raw hourly duplicate business key,Warning,REVIEW,6,265,0.022641509433962263,duplicate date-hour observations are aggregated and counted before modelling
+Hourly duplicate business key,Error,PASS,0,275,0.0,date_key + hour_start must be unique
+Downtime ID duplicate,Error,PASS,0,1388,0.0,downtime_id must be unique
+Daily negative duration,Error,PASS,0,59,0.0,daily time measures must be non-negative
+Event negative duration,Error,PASS,0,1388,0.0,downtime duration must be non-negative
+Daily litres reconciliation,Error,PASS,0,59,0.0,litres produced must equal units × product size
+Daily time reconciliation,Warning,REVIEW,15,59,0.2542372881355932,monitored hours should approximately equal operating + downtime hours
+Hourly time reconciliation,Warning,PASS,0,262,0.0,monitored hours should approximately equal operating + downtime hours
+Unmatched hourly source record,Warning,REVIEW,16,275,0.05818181818181818,output and operational records should share a date-hour key
+Event duration reconciliation,Warning,PASS,0,1388,0.0,reported and timestamp-derived duration should agree within one second

@@ -1,0 +1,34 @@
+name: Data pipeline validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild analytical outputs
+        run: python src/etl.py
+
+      - name: Run validation tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Confirm reproducible processed data
+        run: git diff --exit-code -- data/processed
