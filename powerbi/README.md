@@ -48,13 +48,19 @@ If the repository becomes private, replace the Web source in each TMDL partition
 
 ## Screenshots
 
-The files in `assets/powerbi/` are data-backed design previews generated from the same processed tables. They are intentionally labelled as PBIR design previews; replace them with final Power BI Desktop captures after opening and refreshing the `.pbip` project on Windows.
+The four files in `assets/powerbi/` are genuine Power BI Service captures of the private companion report published in the **Manufacturing Analytics** workspace:
 
-Rebuild the project and previews with:
+- `01-executive-overview.png`
+- `02-production-performance.png`
+- `03-downtime-analysis.png`
+- `04-data-quality-governance.png`
+
+The cloud report is connected to a semantic model containing the seven imported workbook tables and demonstrates publishing, report navigation and service rendering. The checked-in PBIR project remains the richer source-controlled report specification. A native `.pbix` or `.pbit` still requires Power BI Desktop on Windows.
+
+Rebuild the source-controlled project with:
 
 ```bash
 node scripts/build_powerbi_project.mjs
-node scripts/build_powerbi_previews.mjs
 ```
 
 Validate PBIR source with Microsoft's `powerbi-report-author` CLI before committing. The generated PBIR currently validates with zero errors and zero warnings.

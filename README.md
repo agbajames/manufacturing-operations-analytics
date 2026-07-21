@@ -4,15 +4,19 @@
 [![Tests](https://github.com/agbajames/manufacturing-operations-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/agbajames/manufacturing-operations-analytics/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-2BAE9B.svg)](LICENSE)
 
-An end-to-end manufacturing analytics project that uses Python and SQL to transform real industrial filling-line data into an auditable star schema for production, efficiency and downtime analysis. The repository includes an editable Power BI Project (`.pbip`) with a TMDL semantic model, four PBIR report pages and data-backed page previews.
+An end-to-end manufacturing analytics project that uses Python and SQL to transform real industrial filling-line data into an auditable star schema for production, efficiency and downtime analysis. The repository includes an editable Power BI Project (`.pbip`) with a TMDL semantic model, four PBIR report pages and Power BI Service-rendered screenshots.
 
 ![Analytical review workbook preview](assets/workbook_preview.png)
 
-![Power BI Executive Overview preview](assets/powerbi/01-executive-overview.png)
+![Power BI Executive Overview](assets/powerbi/01-executive-overview.png)
+
+| Production Performance | Downtime Analysis | Data Quality |
+|---|---|---|
+| ![Power BI Production Performance](assets/powerbi/02-production-performance.png) | ![Power BI Downtime Analysis](assets/powerbi/03-downtime-analysis.png) | ![Power BI Data Quality](assets/powerbi/04-data-quality-governance.png) |
 
 ## Implementation status
 
-Completed deliverables include the tested ETL pipeline, processed star-schema tables, SQLite database, PostgreSQL scripts, analytical review workbook, reusable DAX measures, and an editable Power BI Project. The PBIR definition validates with Microsoft's report-authoring CLI. A native `.pbix`/`.pbit` still requires Power BI Desktop on Windows; the checked-in screenshots are explicitly labelled data-backed design previews until that Desktop render is completed.
+Completed deliverables include the tested ETL pipeline, processed star-schema tables, SQLite database, PostgreSQL scripts, analytical review workbook, reusable DAX measures, an editable Power BI Project, and a four-page companion report published in Power BI Service. The service report is connected to the seven-table semantic model and provides genuine cloud-rendered screenshots. The PBIR definition validates with Microsoft's report-authoring CLI. A native `.pbix`/`.pbit` still requires Power BI Desktop on Windows.
 
 ## Business problem
 
@@ -64,7 +68,7 @@ The facts are deliberately not joined to one another. Shared dimensions filter e
 
 ```text
 manufacturing-operations-analytics/
-├── assets/                         # Workbook and Power BI page previews
+├── assets/                         # Workbook preview and Power BI Service captures
 ├── data/
 │   ├── raw/                        # Licensed source workbook
 │   ├── processed/                  # Power BI-ready star-schema tables
