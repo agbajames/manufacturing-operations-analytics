@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "e696e51722355a2be503",
+  "position": {
+    "x": 24,
+    "y": 66,
+    "width": 1232,
+    "height": 112,
+    "z": 100,
+    "tabOrder": 100
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Total Production Units"
+                }
+              },
+              "queryRef": "Measures.Total Production Units",
+              "nativeQueryRef": "Total Production Units"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Total Litres Produced"
+                }
+              },
+              "queryRef": "Measures.Total Litres Produced",
+              "nativeQueryRef": "Total Litres Produced"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Operational Efficiency"
+                }
+              },
+              "queryRef": "Measures.Operational Efficiency",
+              "nativeQueryRef": "Operational Efficiency"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Downtime Hours"
+                }
+              },
+              "queryRef": "Measures.Downtime Hours",
+              "nativeQueryRef": "Downtime Hours"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Units per Operating Hour"
+                }
+              },
+              "queryRef": "Measures.Units per Operating Hour",
+              "nativeQueryRef": "Units per Operating Hour"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Headline performance'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

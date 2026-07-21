@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "0273dc91eb163013121b",
+  "position": {
+    "x": 24,
+    "y": 66,
+    "width": 1232,
+    "height": 112,
+    "z": 100,
+    "tabOrder": 100
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Downtime Events"
+                }
+              },
+              "queryRef": "Measures.Downtime Events",
+              "nativeQueryRef": "Downtime Events"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Event Downtime Minutes"
+                }
+              },
+              "queryRef": "Measures.Event Downtime Minutes",
+              "nativeQueryRef": "Event Downtime Minutes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Average Event Duration Minutes"
+                }
+              },
+              "queryRef": "Measures.Average Event Duration Minutes",
+              "nativeQueryRef": "Average Event Duration Minutes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Median Event Duration Minutes"
+                }
+              },
+              "queryRef": "Measures.Median Event Duration Minutes",
+              "nativeQueryRef": "Median Event Duration Minutes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures"
+                    }
+                  },
+                  "Property": "Long Stop Event Rate"
+                }
+              },
+              "queryRef": "Measures.Long Stop Event Rate",
+              "nativeQueryRef": "Long Stop Event Rate"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Downtime event summary'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

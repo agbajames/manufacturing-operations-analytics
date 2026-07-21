@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "e09d37ddfe2fade6e455",
+  "position": {
+    "x": 1050,
+    "y": 10,
+    "width": 206,
+    "height": 80,
+    "z": 50,
+    "tabOrder": 50
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Downtime Events"
+                    }
+                  },
+                  "Property": "duration_band"
+                }
+              },
+              "queryRef": "Fact Downtime Events.duration_band",
+              "nativeQueryRef": "duration_band"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "header": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Duration band'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

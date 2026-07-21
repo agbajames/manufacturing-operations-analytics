@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a466d8611e600bd03633",
+  "position": {
+    "x": 24,
+    "y": 514,
+    "width": 1232,
+    "height": 174,
+    "z": 10,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "What requires review\n• Six duplicate raw hourly operation records are removed deterministically during ETL.\n• Sixteen hour keys appear in only one of the two hourly source tables and remain visible through source_coverage.\n• Fifteen daily records trigger time-reconciliation review warnings. These are surfaced, not silently corrected.\n\nProvenance: every figure originates from the checked-in XLSX, passes automated validation, and is published as versioned CSV/SQLite outputs.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "15px",
+                      "color": "#263238"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

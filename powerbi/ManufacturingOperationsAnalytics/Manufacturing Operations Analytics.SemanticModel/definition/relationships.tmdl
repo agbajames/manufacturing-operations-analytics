@@ -1,0 +1,15 @@
+relationship 'Daily to Date'
+	fromColumn: 'Fact Daily Production'.date_key
+	toColumn: 'Dim Date'.date_key
+
+relationship 'Hourly to Date'
+	fromColumn: 'Fact Hourly Performance'.date_key
+	toColumn: 'Dim Date'.date_key
+
+relationship 'Downtime to Date'
+	fromColumn: 'Fact Downtime Events'.date_key
+	toColumn: 'Dim Date'.date_key
+
+relationship 'Daily to Product'
+	fromColumn: 'Fact Daily Production'.product_key
+	toColumn: 'Dim Product'.product_key

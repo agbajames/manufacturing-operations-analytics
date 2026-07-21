@@ -1,0 +1,92 @@
+table 'Fact Hourly Performance'
+
+	column 'hour_key'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: hour_key
+
+	column 'date_key'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column 'date'
+		dataType: date
+		summarizeBy: none
+		sourceColumn: date
+
+	column 'hour_start'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: hour_start
+
+	column 'hour_end'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: hour_end
+
+	column 'hour_start_ts'
+		dataType: datetime
+		summarizeBy: none
+		sourceColumn: hour_start_ts
+
+	column 'hour_end_ts'
+		dataType: datetime
+		summarizeBy: none
+		sourceColumn: hour_end_ts
+
+	column 'production_units_reported'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: production_units_reported
+
+	column 'operation_record_count'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: operation_record_count
+
+	column 'monitored_time_h'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: monitored_time_h
+
+	column 'operation_time_h'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: operation_time_h
+
+	column 'downtime_h'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: downtime_h
+
+	column 'published_efficiency'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: published_efficiency
+
+	column 'calculated_efficiency'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: calculated_efficiency
+
+	column 'time_reconciliation_variance_h'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: time_reconciliation_variance_h
+
+	column 'source_coverage'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: source_coverage
+
+	partition 'Fact Hourly Performance' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/fact_hourly_performance.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"hour_key", Int64.Type}, {"date_key", Int64.Type}, {"date", type date}, {"hour_start", Int64.Type}, {"hour_end", Int64.Type}, {"hour_start_ts", type datetime}, {"hour_end_ts", type datetime}, {"production_units_reported", type number}, {"operation_record_count", type number}, {"monitored_time_h", type number}, {"operation_time_h", type number}, {"downtime_h", type number}, {"published_efficiency", type number}, {"calculated_efficiency", type number}, {"time_reconciliation_variance_h", type number}, {"source_coverage", type text}}, "en-GB")
+			in
+				Typed

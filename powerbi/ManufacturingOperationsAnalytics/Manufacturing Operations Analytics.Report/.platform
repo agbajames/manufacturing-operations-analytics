@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Manufacturing Operations Analytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "cc453fbe-2dd6-44d4-9e48-91d889f80d4f"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "35e04c7e3b015eb55eea",
+  "position": {
+    "x": 24,
+    "y": 448,
+    "width": 1232,
+    "height": 240,
+    "z": 300,
+    "tabOrder": 300
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Downtime Events"
+                    }
+                  },
+                  "Property": "downtime_id"
+                }
+              },
+              "queryRef": "Fact Downtime Events.downtime_id",
+              "nativeQueryRef": "downtime_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Downtime Events"
+                    }
+                  },
+                  "Property": "downtime_start_ts"
+                }
+              },
+              "queryRef": "Fact Downtime Events.downtime_start_ts",
+              "nativeQueryRef": "downtime_start_ts"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Downtime Events"
+                    }
+                  },
+                  "Property": "downtime_end_ts"
+                }
+              },
+              "queryRef": "Fact Downtime Events.downtime_end_ts",
+              "nativeQueryRef": "downtime_end_ts"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Downtime Events"
+                    }
+                  },
+                  "Property": "reported_duration_minutes"
+                }
+              },
+              "queryRef": "Fact Downtime Events.reported_duration_minutes",
+              "nativeQueryRef": "reported_duration_minutes"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Downtime Events"
+                    }
+                  },
+                  "Property": "duration_band"
+                }
+              },
+              "queryRef": "Fact Downtime Events.duration_band",
+              "nativeQueryRef": "duration_band"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Downtime event detail'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

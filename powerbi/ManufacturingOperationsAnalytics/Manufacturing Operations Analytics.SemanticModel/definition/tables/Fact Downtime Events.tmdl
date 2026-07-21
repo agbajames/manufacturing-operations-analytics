@@ -1,0 +1,68 @@
+table 'Fact Downtime Events'
+
+	column 'downtime_id'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: downtime_id
+
+	column 'date_key'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column 'date'
+		dataType: date
+		summarizeBy: none
+		sourceColumn: date
+
+	column 'downtime_start_ts'
+		dataType: datetime
+		summarizeBy: none
+		sourceColumn: downtime_start_ts
+
+	column 'downtime_end_ts'
+		dataType: datetime
+		summarizeBy: none
+		sourceColumn: downtime_end_ts
+
+	column 'start_hour'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: start_hour
+
+	column 'reported_duration_minutes'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: reported_duration_minutes
+
+	column 'calculated_duration_minutes'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: calculated_duration_minutes
+
+	column 'duration_variance_seconds'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: duration_variance_seconds
+
+	column 'duration_band'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: duration_band
+		sortByColumn: duration_band_sort
+
+	column duration_band_sort = SWITCH ( [duration_band], "<1 min", 1, "1–5 min", 2, "5–15 min", 3, "15–60 min", 4, "60+ min", 5 )
+		dataType: int64
+		isHidden
+		summarizeBy: none
+
+	partition 'Fact Downtime Events' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/fact_downtime_events.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"downtime_id", type text}, {"date_key", Int64.Type}, {"date", type date}, {"downtime_start_ts", type datetime}, {"downtime_end_ts", type datetime}, {"start_hour", Int64.Type}, {"reported_duration_minutes", type number}, {"calculated_duration_minutes", type number}, {"duration_variance_seconds", type number}, {"duration_band", type text}}, "en-GB")
+			in
+				Typed

@@ -1,0 +1,46 @@
+table 'Data Quality Report'
+
+	column 'check_name'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: check_name
+
+	column 'severity'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: severity
+
+	column 'status'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	column 'affected_rows'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: affected_rows
+
+	column 'rows_tested'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: rows_tested
+
+	column 'affected_pct'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: affected_pct
+
+	column 'rule'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: rule
+
+	partition 'Data Quality Report' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/data_quality_report.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"check_name", type text}, {"severity", type text}, {"status", type text}, {"affected_rows", Int64.Type}, {"rows_tested", Int64.Type}, {"affected_pct", type number}, {"rule", type text}}, "en-GB")
+			in
+				Typed

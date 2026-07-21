@@ -1,0 +1,93 @@
+table 'Fact Daily Production'
+
+	column 'date_key'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column 'date'
+		dataType: date
+		summarizeBy: none
+		sourceColumn: date
+
+	column 'product_key'
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column 'product_type_l'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: product_type_l
+
+	column 'production_units'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: production_units
+
+	column 'liters_produced'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: liters_produced
+
+	column 'production_start_ts'
+		dataType: datetime
+		summarizeBy: none
+		sourceColumn: production_start_ts
+
+	column 'production_end_ts'
+		dataType: datetime
+		summarizeBy: none
+		sourceColumn: production_end_ts
+
+	column 'published_efficiency'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: published_efficiency
+
+	column 'calculated_efficiency'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: calculated_efficiency
+
+	column 'published_gallons_per_hour'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: published_gallons_per_hour
+
+	column 'monitored_hours'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: monitored_hours
+
+	column 'operating_hours'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: operating_hours
+
+	column 'downtime_hours'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: downtime_hours
+
+	column 'time_reconciliation_variance_h'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: time_reconciliation_variance_h
+
+	column 'litres_reconciliation_variance'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: litres_reconciliation_variance
+
+	partition 'Fact Daily Production' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/fact_daily_production.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"date_key", Int64.Type}, {"date", type date}, {"product_key", type text}, {"product_type_l", Int64.Type}, {"production_units", Int64.Type}, {"liters_produced", Int64.Type}, {"production_start_ts", type datetime}, {"production_end_ts", type datetime}, {"published_efficiency", type number}, {"calculated_efficiency", type number}, {"published_gallons_per_hour", type number}, {"monitored_hours", type number}, {"operating_hours", type number}, {"downtime_hours", type number}, {"time_reconciliation_variance_h", type number}, {"litres_reconciliation_variance", type number}}, "en-GB")
+			in
+				Typed

@@ -4,13 +4,15 @@
 [![Tests](https://github.com/agbajames/manufacturing-operations-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/agbajames/manufacturing-operations-analytics/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-2BAE9B.svg)](LICENSE)
 
-An end-to-end manufacturing analytics project that uses Python and SQL to transform real industrial filling-line data into an auditable star schema for production, efficiency and downtime analysis. The repository also includes a Power BI model and report specification; it does not include a `.pbix` file or a deployed report.
+An end-to-end manufacturing analytics project that uses Python and SQL to transform real industrial filling-line data into an auditable star schema for production, efficiency and downtime analysis. The repository includes an editable Power BI Project (`.pbip`) with a TMDL semantic model, four PBIR report pages and data-backed page previews.
 
 ![Analytical review workbook preview](assets/workbook_preview.png)
 
+![Power BI Executive Overview preview](assets/powerbi/01-executive-overview.png)
+
 ## Implementation status
 
-Completed deliverables include the tested ETL pipeline, processed star-schema tables, SQLite database, PostgreSQL scripts, analytical review workbook, reusable DAX measures, and a documented Power BI build specification. A Power BI Desktop file and Power BI Service deployment are outside the scope of this repository.
+Completed deliverables include the tested ETL pipeline, processed star-schema tables, SQLite database, PostgreSQL scripts, analytical review workbook, reusable DAX measures, and an editable Power BI Project. The PBIR definition validates with Microsoft's report-authoring CLI. A native `.pbix`/`.pbit` still requires Power BI Desktop on Windows; the checked-in screenshots are explicitly labelled data-backed design previews until that Desktop render is completed.
 
 ## Business problem
 
@@ -42,8 +44,8 @@ flowchart LR
     B --> C["Analytics-ready CSVs"]
     B --> D["SQLite analytical database"]
     C --> E["PostgreSQL star schema"]
-    C --> F["Power BI model specification"]
-    F --> G["Proposed report pages"]
+    C --> F["TMDL semantic model"]
+    F --> G["Four-page PBIR report"]
 ```
 
 ## Data model
@@ -62,13 +64,13 @@ The facts are deliberately not joined to one another. Shared dimensions filter e
 
 ```text
 manufacturing-operations-analytics/
-├── assets/                         # Analytical workbook preview
+├── assets/                         # Workbook and Power BI page previews
 ├── data/
 │   ├── raw/                        # Licensed source workbook
 │   ├── processed/                  # Power BI-ready star-schema tables
 │   └── manufacturing_analytics.sqlite
 ├── docs/                           # Data dictionary and limitations
-├── powerbi/                        # DAX, theme and implementation guide
+├── powerbi/                        # DAX, theme, PBIP project and report guide
 ├── sql/                            # PostgreSQL DDL, views and load script
 ├── src/etl.py                      # Reproducible transformation pipeline
 ├── tests/test_etl.py               # Automated quality and relationship tests
@@ -87,14 +89,13 @@ python -m unittest discover -s tests -v
 
 The ETL verifies the source MD5 before processing. It writes seven CSV outputs, an analysis summary and a SQLite database.
 
-## Implement the Power BI specification
+## Open and refresh the Power BI report
 
-1. Follow `powerbi/model-and-build-guide.md`.
-2. Import the processed CSVs or the analytical workbook.
-3. Create the relationships exactly as specified.
-4. Add the measures from `powerbi/measures.dax`.
-5. Import `powerbi/theme.json`.
-6. Build the four report pages and validate the headline totals against this README.
+1. Open `powerbi/ManufacturingOperationsAnalytics/Manufacturing Operations Analytics.pbip` in Power BI Desktop.
+2. Select **Home → Refresh** and use Anonymous Web credentials for the public GitHub source if prompted.
+3. Run `python -m unittest discover -s tests -v` to verify the headline reconciliations.
+4. Review filters, interactions, refresh instructions and expected totals in `powerbi/README.md`.
+5. Save as `.pbix` or export `.pbit` from Power BI Desktop if a native binary/template is needed.
 
 The specification uses **Operational Efficiency**, not OEE. Full OEE would require ideal-cycle and quality/reject data that the public source does not provide.
 

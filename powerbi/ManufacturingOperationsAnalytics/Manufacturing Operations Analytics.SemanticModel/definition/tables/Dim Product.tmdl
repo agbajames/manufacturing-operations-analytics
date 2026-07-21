@@ -1,0 +1,32 @@
+table 'Dim Product'
+
+	column 'product_key'
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column 'product_type_l'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: product_type_l
+
+	column 'product_name'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_name
+
+	column 'volume_litres_per_unit'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: volume_litres_per_unit
+
+	partition 'Dim Product' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/agbajames/manufacturing-operations-analytics/main/data/processed/dim_product.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"product_key", type text}, {"product_type_l", Int64.Type}, {"product_name", type text}, {"volume_litres_per_unit", Int64.Type}}, "en-GB")
+			in
+				Typed

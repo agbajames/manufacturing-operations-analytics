@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "ReportSectionQuality",
+  "displayName": "Data Quality & Governance",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "2cb74c65849d85d1d9eb",
+      "target": "07c5935371fc458b8807",
+      "type": "NoFilter"
+    },
+    {
+      "source": "07c5935371fc458b8807",
+      "target": "2cb74c65849d85d1d9eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "2cb74c65849d85d1d9eb",
+      "target": "5474064caae200d8dda9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "5474064caae200d8dda9",
+      "target": "2cb74c65849d85d1d9eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "2cb74c65849d85d1d9eb",
+      "target": "dfdffe0a6acb85a8dba0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "dfdffe0a6acb85a8dba0",
+      "target": "2cb74c65849d85d1d9eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "2cb74c65849d85d1d9eb",
+      "target": "6a01d0a15183f34bfbf4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "6a01d0a15183f34bfbf4",
+      "target": "2cb74c65849d85d1d9eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "2cb74c65849d85d1d9eb",
+      "target": "3f7400c512c5f2e190f2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3f7400c512c5f2e190f2",
+      "target": "2cb74c65849d85d1d9eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "2cb74c65849d85d1d9eb",
+      "target": "a466d8611e600bd03633",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a466d8611e600bd03633",
+      "target": "2cb74c65849d85d1d9eb",
+      "type": "NoFilter"
+    }
+  ]
+}

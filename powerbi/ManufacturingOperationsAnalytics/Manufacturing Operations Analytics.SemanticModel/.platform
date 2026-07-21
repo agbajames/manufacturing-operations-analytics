@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Manufacturing Operations Analytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "85171d2e-e76e-4b8a-82ed-9bfdba251070"
+  }
+}

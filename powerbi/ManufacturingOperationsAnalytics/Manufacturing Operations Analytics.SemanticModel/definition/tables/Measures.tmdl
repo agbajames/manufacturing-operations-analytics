@@ -1,0 +1,79 @@
+table Measures
+
+	measure 'Total Production Units' = SUM ( 'Fact Daily Production'[production_units] )
+		formatString: #,##0
+
+	measure 'Total Litres Produced' = SUM ( 'Fact Daily Production'[liters_produced] )
+		formatString: #,##0
+
+	measure 'Production Days' = DISTINCTCOUNT ( 'Fact Daily Production'[date_key] )
+		formatString: #,##0
+
+	measure 'Monitored Hours' = SUM ( 'Fact Daily Production'[monitored_hours] )
+		formatString: #,##0.0
+
+	measure 'Operating Hours' = SUM ( 'Fact Daily Production'[operating_hours] )
+		formatString: #,##0.0
+
+	measure 'Downtime Hours' = SUM ( 'Fact Daily Production'[downtime_hours] )
+		formatString: #,##0.0
+
+	measure 'Operational Efficiency' = DIVIDE ( [Operating Hours], [Monitored Hours] )
+		formatString: 0.0%
+
+	measure 'Units per Operating Hour' = DIVIDE ( [Total Production Units], [Operating Hours] )
+		formatString: #,##0.0
+
+	measure 'Downtime Events' = DISTINCTCOUNT ( 'Fact Downtime Events'[downtime_id] )
+		formatString: #,##0
+
+	measure 'Event Downtime Minutes' = SUM ( 'Fact Downtime Events'[reported_duration_minutes] )
+		formatString: #,##0.0
+
+	measure 'Average Event Duration Minutes' = AVERAGE ( 'Fact Downtime Events'[reported_duration_minutes] )
+		formatString: #,##0.0
+
+	measure 'Median Event Duration Minutes' = MEDIAN ( 'Fact Downtime Events'[reported_duration_minutes] )
+		formatString: #,##0.0
+
+	measure 'Long Stop Events' = CALCULATE ( [Downtime Events], 'Fact Downtime Events'[reported_duration_minutes] >= 15 )
+		formatString: #,##0
+
+	measure 'Long Stop Event Rate' = DIVIDE ( [Long Stop Events], [Downtime Events] )
+		formatString: 0.0%
+
+	measure 'Hourly Records' = COUNTROWS ( 'Fact Hourly Performance' )
+		formatString: #,##0
+
+	measure 'Hourly Reported Output' = SUM ( 'Fact Hourly Performance'[production_units_reported] )
+		formatString: #,##0
+
+	measure 'Hourly Calculated Efficiency' = DIVIDE ( SUM ( 'Fact Hourly Performance'[operation_time_h] ), SUM ( 'Fact Hourly Performance'[monitored_time_h] ) )
+		formatString: 0.0%
+
+	measure 'Matched Hourly Records' = CALCULATE ( [Hourly Records], 'Fact Hourly Performance'[source_coverage] = "Both" )
+		formatString: #,##0
+
+	measure 'Hourly Source Match Rate' = DIVIDE ( [Matched Hourly Records], [Hourly Records] )
+		formatString: 0.0%
+
+	measure 'Quality Checks Requiring Review' = CALCULATE ( COUNTROWS ( 'Data Quality Report' ), 'Data Quality Report'[status] = "REVIEW" )
+		formatString: #,##0
+
+	measure 'Validated Daily Rows' = COUNTROWS ( 'Fact Daily Production' )
+		formatString: #,##0
+
+	measure 'Validated Hourly Rows' = COUNTROWS ( 'Fact Hourly Performance' )
+		formatString: #,##0
+
+	measure 'Validated Downtime Events' = COUNTROWS ( 'Fact Downtime Events' )
+		formatString: #,##0
+
+	column Dummy
+		dataType: string
+		isHidden
+		sourceColumn: [Dummy]
+
+	partition Measures = calculated
+		mode: import
+		source = ROW ( "Dummy", BLANK () )

@@ -1,0 +1,136 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "2cb74c65849d85d1d9eb",
+  "position": {
+    "x": 24,
+    "y": 202,
+    "width": 760,
+    "height": 290,
+    "z": 300,
+    "tabOrder": 300
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Data Quality Report"
+                    }
+                  },
+                  "Property": "check_name"
+                }
+              },
+              "queryRef": "Data Quality Report.check_name",
+              "nativeQueryRef": "check_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Data Quality Report"
+                    }
+                  },
+                  "Property": "severity"
+                }
+              },
+              "queryRef": "Data Quality Report.severity",
+              "nativeQueryRef": "severity"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Data Quality Report"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "Data Quality Report.status",
+              "nativeQueryRef": "status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Data Quality Report"
+                    }
+                  },
+                  "Property": "affected_rows"
+                }
+              },
+              "queryRef": "Data Quality Report.affected_rows",
+              "nativeQueryRef": "affected_rows"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Data Quality Report"
+                    }
+                  },
+                  "Property": "affected_pct"
+                }
+              },
+              "queryRef": "Data Quality Report.affected_pct",
+              "nativeQueryRef": "affected_pct"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Data Quality Report"
+                    }
+                  },
+                  "Property": "rule"
+                }
+              },
+              "queryRef": "Data Quality Report.rule",
+              "nativeQueryRef": "rule"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Validation results'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
