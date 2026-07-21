@@ -43,18 +43,3 @@ Operational Efficiency is a weighted ratio. It is not an average of row-level pe
 4. Select **Home → Refresh**. For the GitHub raw URLs, choose an Anonymous Web credential at the repository root level if prompted.
 5. Confirm the headline figures against the table above and review the Data Quality & Governance page before publishing.
 6. Save the project. Use **File → Save As** for a `.pbix`, or export a `.pbit` template if a binary/template artefact is required.
-
-If the repository becomes private, replace the Web source in each TMDL partition with an approved local, SharePoint, Lakehouse or database source and configure credentials accordingly.
-
-## Screenshots
-
-The files in `assets/powerbi/` are data-backed design previews generated from the same processed tables. They are intentionally labelled as PBIR design previews; replace them with final Power BI Desktop captures after opening and refreshing the `.pbip` project on Windows.
-
-Rebuild the project and previews with:
-
-```bash
-node scripts/build_powerbi_project.mjs
-node scripts/build_powerbi_previews.mjs
-```
-
-Validate PBIR source with Microsoft's `powerbi-report-author` CLI before committing. The generated PBIR currently validates with zero errors and zero warnings.
