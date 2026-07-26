@@ -51,26 +51,33 @@ These findings are descriptive. The source has no stop-reason, machine or operat
 ## Architecture
 
 ```mermaid
-flowchart LR
-    A["Public industrial XLSX"] --> B["Python validation and ETL"]
-    B --> C["Analytics-ready CSVs"]
-    B --> D["SQLite analytical database"]
-    C --> E["PostgreSQL star schema"]
-    C --> F["TMDL semantic model"]
-    F --> G["Four-page PBIR report"]
+flowchart TD
+    A["Public industrial<br/>XLSX"] --> B["Python validation<br/>and ETL"]
+    B --> C["Analytics-ready<br/>CSVs"]
+    B --> D["SQLite analytical<br/>database"]
+    C --> E["PostgreSQL<br/>star schema"]
+    C --> F["TMDL semantic<br/>model"]
+    F --> G["Four-page<br/>PBIR report"]
 ```
 
 ## Data model
 
 ```mermaid
-erDiagram
-    DIM_DATE ||--o{ FACT_DAILY_PRODUCTION : date_key
-    DIM_DATE ||--o{ FACT_HOURLY_PERFORMANCE : date_key
-    DIM_DATE ||--o{ FACT_DOWNTIME_EVENTS : date_key
-    DIM_PRODUCT ||--o{ FACT_DAILY_PRODUCTION : product_key
+flowchart TD
+    DD["DIM_DATE"]
+    DP["DIM_PRODUCT"]
+
+    FD["FACT_DAILY_<br/>PRODUCTION"]
+    FH["FACT_HOURLY_<br/>PERFORMANCE"]
+    FE["FACT_DOWNTIME_<br/>EVENTS"]
+
+    DP -->|"1 to many"| FD
+    DD -->|"1 to many"| FD
+    DD -->|"1 to many"| FH
+    DD -->|"1 to many"| FE
 ```
 
-The facts are deliberately not joined to one another. Shared dimensions filter each fact at its own grain.
+Fact tables are not joined directly; shared dimensions filter each fact at its native grain.
 
 ## Repository structure
 
