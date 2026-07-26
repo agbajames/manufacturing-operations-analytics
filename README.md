@@ -50,32 +50,11 @@ These findings are descriptive. The source has no stop-reason, machine or operat
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    A["Public industrial<br/>XLSX"] --> B["Python validation<br/>and ETL"]
-    B --> C["Analytics-ready<br/>CSVs"]
-    B --> D["SQLite analytical<br/>database"]
-    C --> E["PostgreSQL<br/>star schema"]
-    C --> F["TMDL semantic<br/>model"]
-    F --> G["Four-page<br/>PBIR report"]
-```
+![Manufacturing analytics architecture](assets/diagrams/architecture.svg)
 
 ## Data model
 
-```mermaid
-flowchart TD
-    DD["DIM_DATE"]
-    DP["DIM_PRODUCT"]
-
-    FD["FACT_DAILY_<br/>PRODUCTION"]
-    FH["FACT_HOURLY_<br/>PERFORMANCE"]
-    FE["FACT_DOWNTIME_<br/>EVENTS"]
-
-    DP -->|"1 to many"| FD
-    DD -->|"1 to many"| FD
-    DD -->|"1 to many"| FH
-    DD -->|"1 to many"| FE
-```
+![Manufacturing analytics dimensional model](assets/diagrams/data-model.svg)
 
 Fact tables are not joined directly; shared dimensions filter each fact at its native grain.
 
