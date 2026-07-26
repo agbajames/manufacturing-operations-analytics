@@ -56,25 +56,31 @@ These findings are descriptive. The source has no stop-reason, machine or operat
 
 ![Manufacturing analytics dimensional model](assets/diagrams/data-model.svg)
 
-Fact tables are not joined directly; shared dimensions filter each fact at its native grain.
+All relationships shown are one-to-many from dimensions to fact tables. Fact tables are not joined directly; shared dimensions filter each fact at its native grain.
 
 ## Repository structure
 
-```text
 manufacturing-operations-analytics/
-├── assets/                         # Workbook and Power BI page previews
-├── data/
-│   ├── raw/                        # Licensed source workbook
-│   ├── processed/                  # Power BI-ready star-schema tables
-│   └── manufacturing_analytics.sqlite
-├── docs/                           # Data dictionary and limitations
-├── powerbi/                        # DAX, theme, PBIP project and report guide
-├── sql/                            # PostgreSQL DDL, views and load script
-├── src/etl.py                      # Reproducible transformation pipeline
-├── tests/test_etl.py               # Automated quality and relationship tests
-├── Manufacturing_Operations_Analytics.xlsx
-└── requirements.txt
-```
+  .github/workflows/
+  assets/
+    diagrams/
+    powerbi/
+    workbook_preview.png
+  data/
+    raw/
+    processed/
+    manufacturing_analytics.sqlite
+  docs/
+  powerbi/
+  scripts/
+  sql/
+  src/
+    etl.py
+  tests/
+    test_etl.py
+    test_powerbi_reconciliation.py
+  Manufacturing_Operations_Analytics.xlsx
+  requirements.txt
 
 ## Reproduce the project
 
