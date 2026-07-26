@@ -109,7 +109,7 @@ The ETL verifies the source MD5 before processing. It writes seven CSV outputs, 
 4. Review filters, interactions, refresh instructions and expected totals in `powerbi/README.md`.
 5. Save as `.pbix` or export `.pbit` from Power BI Desktop if a native binary/template is needed.
 
-The specification uses **Operational Efficiency**, not OEE. Full OEE would require ideal-cycle and quality/reject data that the public source does not provide.
+The report uses **Operational Efficiency**, not OEE. Full OEE would require ideal-cycle and quality/reject data that the public source does not provide.
 
 ## Data source and licence
 
