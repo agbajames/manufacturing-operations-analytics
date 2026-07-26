@@ -60,8 +60,10 @@ All relationships shown are one-to-many from dimensions to fact tables. Fact tab
 
 ## Repository structure
 
+```text
 manufacturing-operations-analytics/
-  .github/workflows/
+  .github/
+    workflows/
   assets/
     diagrams/
     powerbi/
@@ -81,6 +83,7 @@ manufacturing-operations-analytics/
     test_powerbi_reconciliation.py
   Manufacturing_Operations_Analytics.xlsx
   requirements.txt
+```
 
 ## Reproduce the project
 
